@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/notes
+    ports:
+      - 3000:3000
+      - 1234:1234
+    command:
+      /bin/sh -c '/bin/bash'
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./services/db/conf/my-local.cnf:/etc/mysql/conf.d/my-local.cnf
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: notes
+      MYSQL_PASSWORD: notes
+
+volumes:
+  db-data:
+    driver: local

@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Docker内でデバッグ用rails serverを起動する
+            "name": "Rails",
+            "type": "Ruby",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "remoteHost": "0.0.0.0",
+            "remotePort": "1234",
+            "program": "bin/rails",
+            "args": ["s", "-b", "0.0.0.0", "-p", "3000"],
+          }
+    ]
+}
